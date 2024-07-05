@@ -247,7 +247,6 @@
 
             $('#submitBtn').click(function(e) {
                 e.preventDefault();
-
                 var name = $('#name').val();
                 var regno = $('#regno').val();
                 var email = $('#email').val();
@@ -265,14 +264,13 @@
                 var networking = $('#network').prop('checked');
                 var webtechnology = $('#webtechnology').prop('checked');
                 var cybersecurity = $('#cybersecurity').prop('checked');
-
                 // Validation functions
                 function isValidEmail(email) {
                     return email.includes('@gmail.com');
                 }
 
                 function isValidPassword(password) {
-                    return /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}/.test(password);
+                    return /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}/.test(password);
                 }
 
                 function isValidPhone(phone) {
@@ -284,17 +282,17 @@
                 }
 
                 function isValidRoomNumber(roomnum) {
-                    return roomnum.length < 10;
+                    return roomnum.length < 5;
                 }
-
                 function isValidComplaints(complaints) {
                     var plainTextComplaints = $('<div>').html(complaints).text();
-                    return plainTextComplaints.length >= 10 && plainTextComplaints.length <= 400;
-                }
+                        var validTextRegex = /^[a-zA-Z\s.,!?'"-]*$/;
+                        return validTextRegex.test(plainTextComplaints) && plainTextComplaints.length >= 10 && plainTextComplaints.length <= 400;
+                    }
 
                 // Perform validations
                 if (!name || !isValidName(name)) {
-                    alert('Please enter a valid name starting with alphabets.');
+                    alert('Please enter a valid name.');
                     return;
                 }
 
@@ -314,7 +312,7 @@
                 }
 
                 if (!isValidPassword(password)) {
-                    alert('Password must contain at least one alphabet, one special character, and one number, and be at least 8 characters long.');
+                    alert('Password must contain at least one alphabet, one special character, and one number, and be at least 8 characters long and max 15 char.');
                     return;
                 }
 
@@ -342,7 +340,7 @@
                 }
 
                 if (!roomnum || !isValidRoomNumber(roomnum)) {
-                    alert('Please enter a valid room number with less than 10 characters.');
+                    alert('Please enter a valid room number with less than 5 characters.');
                     return;
                 }
 
@@ -362,7 +360,7 @@
                 }
 
                 if (!complaints || !isValidComplaints(complaints)) {
-                    alert('Please enter your complaints between 10 to 400 characters.');
+                    alert('Please enter your complaints between 10 to 400 characters,special char and Numbers are not allowed.');
                     return;
                 }
 
